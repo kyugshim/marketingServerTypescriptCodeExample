@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package alarm;
+
+service AlarmService {
+  rpc Feedback(FeedbackInput) returns (FeedbackOutput) {}
+}
+
+message FeedbackInput {
+  string alarmType = 1; // 알림
+  string messageType = 2; // 
+  string scheduleDate = 3; // 
+  repeated FeedbackTargetInput targetInput = 4;
+}
+
+message FeedbackTargetInput {
+  int32 userId = 1; // tutor user id 
+  int32 studentUserId = 2; // student user id
+  repeated string classGuideLines = 3; // 가이드 질문
+  repeated string classGuideNotices = 4; // 가이드 노티스 내용
+  int32 npsScore = 5; //NPS 점수
+}
+
+message FeedbackOutput {
+  bool result = 1;
+}

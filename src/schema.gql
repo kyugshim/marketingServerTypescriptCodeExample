@@ -1,0 +1,262 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type StudentMbti {
+  Q1: MBTIEI
+  Q2: MBTINS
+  Q3: MBTITF
+  Q4: MBTIJP
+}
+
+enum MBTIEI {
+  E
+  I
+}
+
+enum MBTINS {
+  S
+  N
+}
+
+enum MBTITF {
+  T
+  F
+}
+
+enum MBTIJP {
+  J
+  P
+}
+
+type PairMbti {
+  Q1: MBTIEI
+  Q2: MBTIJP
+  Q3: MBTINS
+  Q4: MBTITF
+}
+
+type GetStudentMbtiOutput {
+  userId: Int!
+  isUsing: Boolean!
+  mbti: StudentMbti
+  pairMbti: PairMbti
+  timestamp: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type TutorMbti {
+  Q1: MBTIEI
+  Q2: MBTIJP
+  Q3: MBTINS
+  Q4: MBTITF
+}
+
+type GetTutorMbtiOutput {
+  userId: Int!
+  isUsing: Boolean!
+  tutorMbti: TutorMbti
+  timestamp: DateTime!
+}
+
+type StudentMbtiMatching {
+  Q1: MBTIEI
+  Q2: MBTINS
+  Q3: MBTITF
+  Q4: MBTIJP
+}
+
+type PairMbtiMatching {
+  Q1: MBTIEI
+  Q2: MBTIJP
+  Q3: MBTINS
+  Q4: MBTITF
+}
+
+type TutorMbtiMatching {
+  Q1: MBTIEI
+  Q2: MBTIJP
+  Q3: MBTINS
+  Q4: MBTITF
+}
+
+type GetStudentMatchingMbtiOutput {
+  userId: Int
+  tutorMbti: TutorMbtiMatching
+}
+
+type GetTutorMbtiByTutorIdOutput {
+  userId: Int
+  tutorMbti: TutorMbtiMatching
+}
+
+type GetStudentFeedbackOutput {
+  lectureVtNo: Int!
+  lectureSubjectId: Int
+  studentUserId: Int!
+  tutorUserId: Int!
+  tutorName: String
+  switchTutor: Boolean
+  feedbackVersion: String
+  cycleCount: Int!
+  bodyListMap: JSONObject
+}
+
+type GetSalesCustomerServiceFormOutput {
+  uuid: String!
+  parentName: String!
+  phoneNumber: String!
+  privacyAgreement: Boolean!
+  marketingAgreement: Boolean
+  consultTime: String
+  studentGrade: String
+  submittedPath: String
+  utmCampaign: String
+  utmContent: String
+  utmMedium: String
+  utmSource: String
+  utmTerm: String
+}
+
+input studentMbtiInputType {
+  Q1: MBTIEI
+  Q2: MBTINS
+  Q3: MBTITF
+  Q4: MBTIJP
+}
+
+input pairMbtiInputType {
+  Q1: MBTIEI
+  Q2: MBTIJP
+  Q3: MBTINS
+  Q4: MBTITF
+}
+
+input TutorMbtiInputType {
+  Q1: MBTIEI
+  Q2: MBTIJP
+  Q3: MBTINS
+  Q4: MBTITF
+}
+
+input studentMbtiMatchingInputType {
+  Q1: MBTIEI
+  Q2: MBTINS
+  Q3: MBTITF
+  Q4: MBTIJP
+}
+
+input pairMbtiMatchingInputType {
+  Q1: MBTIEI
+  Q2: MBTIJP
+  Q3: MBTINS
+  Q4: MBTITF
+}
+
+input TutorMbtiMatchingInputType {
+  Q1: MBTIEI
+  Q2: MBTIJP
+  Q3: MBTINS
+  Q4: MBTITF
+}
+
+"""JSONObject custom scalar type"""
+scalar JSONObject
+
+type Query {
+  root: Boolean!
+  getAllStudent: [GetStudentMbtiOutput!]!
+  getOneStudentById(input: GetStudentMbtiInput!): GetStudentMbtiOutput
+  getAllTutor: [GetTutorMbtiOutput!]!
+  getOneTutorById(input: GetTutorMbtiInput!): GetTutorMbtiOutput
+  getAllTutorMbtiByStudentId(input: GetStudentMatchingMbtiInput!): [GetStudentMatchingMbtiOutput!]!
+  getTutorMbtiByTutorId(input: GetTutorMbtiByTutorIdInput!): [GetTutorMbtiByTutorIdOutput!]!
+  getAllStudentSurvey: [GetStudentFeedbackOutput!]!
+  getOneStudentFeedbackById(input: GetStudentFeedbackInput!): GetStudentFeedbackOutput
+  getAllSalesCustomerServiceForm: [GetSalesCustomerServiceFormOutput!]!
+  getManySalesCustomerServiceForm(input: GetSalesCustomerServiceFormInput!): [GetSalesCustomerServiceFormOutput!]!
+}
+
+input GetStudentMbtiInput {
+  userId: Int!
+}
+
+input GetTutorMbtiInput {
+  userId: Int!
+}
+
+input GetStudentMatchingMbtiInput {
+  userId: Int!
+}
+
+input GetTutorMbtiByTutorIdInput {
+  userId: [Int!]!
+}
+
+input GetStudentFeedbackInput {
+  lectureVtNo: Int!
+  studentUserId: Int!
+  tutorUserId: Int!
+  feedbackVersion: String!
+  cycleCount: Int!
+}
+
+input GetSalesCustomerServiceFormInput {
+  uuid: String!
+  parentName: String!
+  phoneNumber: String!
+}
+
+type Mutation {
+  upsertStudentMbti(input: UpsertStudentMbtiInput!): GetStudentMbtiOutput
+  upsertTutorMbti(input: UpsertTutorMbtiInput!): GetTutorMbtiOutput
+  upsertStudentFeedback(input: UpsertStudentFeedbackInput!): GetStudentFeedbackOutput!
+  upsertCustomerServiceForm(input: UpsertSalesCustomerServiceFormInput!): GetSalesCustomerServiceFormOutput
+}
+
+input UpsertStudentMbtiInput {
+  userId: Int!
+  isUsing: Boolean!
+  mbti: studentMbtiInputType
+  pairMbti: pairMbtiInputType
+  timestamp: DateTime!
+}
+
+input UpsertTutorMbtiInput {
+  userId: Int!
+  isUsing: Boolean!
+  tutorMbti: TutorMbtiInputType
+  timestamp: DateTime!
+}
+
+input UpsertStudentFeedbackInput {
+  lectureVtNo: Int!
+  lectureSubjectId: Int
+  studentUserId: Int!
+  tutorUserId: Int!
+  tutorName: String
+  feedbackVersion: String
+  switchTutor: Boolean
+  cycleCount: Int!
+  bodyListMap: JSONObject
+}
+
+input UpsertSalesCustomerServiceFormInput {
+  uuid: String!
+  parentName: String!
+  phoneNumber: String!
+  privacyAgreement: Boolean!
+  marketingAgreement: Boolean
+  consultTime: String
+  studentGrade: String
+  submittedPath: String
+  utmCampaign: String
+  utmContent: String
+  utmMedium: String
+  utmSource: String
+  utmTerm: String
+}

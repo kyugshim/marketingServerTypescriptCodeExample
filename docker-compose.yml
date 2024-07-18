@@ -1,0 +1,75 @@
+version: '3.8'
+services:
+  api:
+    build:
+      dockerfile: ./docker/dockerfile.local
+      context: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app/
+
+#  scylla-node1:
+#    image: scylladb/scylla:latest
+#    hostname: scylladb/scylla:latest
+#    ports:
+#      - "9160:9160"
+#      - "9042:9042"
+#    volumes:
+#      - "./scylla-init.sh:/scylla-init.sh"
+#    command:
+#      - "sh /scylla-init.sh"
+#    healthcheck:
+#      test: ["CMD-SHELL", "[ $$(nodetool statusgossip) = running ]"]
+
+  scylla-node:
+    image: scylladb/scylla:latest
+    hostname: scylladb/scylla:latest
+    ports:
+      - "9160:9160"
+      - "9042:9042"
+#
+#  scylla-node3:
+#    image: scylladb/scylla
+#    hostname: scylladb/scylla
+#    ports:
+#      - "9160:9160"
+#      - "9042:9042"
+
+#  scylla-node1:
+#    container_name: scylla-node1
+#    image: scylladb/scylla:latest
+#    restart: always
+#    command: --seeds=scylla-node1,scylla-node2 --smp 1 --memory 750M --overprovisioned 1 --api-address 0.0.0.0
+#    volumes:
+#      - "./scylla/scylla.yaml:/etc/scylla/scylla.yaml"
+#      - "./scylla/cassandra-rackdc.properties.dc1:/etc/scylla/cassandra-rackdc.properties"
+#      - "./scylla/mbti-data.txt:/mbti-data.txt"
+#    networks:
+#      web:
+#
+#  scylla-node2:
+#    container_name: scylla-node2
+#    image: scylladb/scylla:latest
+#    restart: always
+#    command: --seeds=scylla-node1,scylla-node2 --smp 1 --memory 750M --overprovisioned 1 --api-address 0.0.0.0
+#    volumes:
+#      - "./scylla/scylla.yaml:/etc/scylla/scylla.yaml"
+#      - "./scylla/cassandra-rackdc.properties.dc1:/etc/scylla/cassandra-rackdc.properties"
+#    networks:
+#      web:
+#
+#  scylla-node3:
+#    container_name: scylla-node3
+#    image: scylladb/scylla:latest
+#    restart: always
+#    command: --seeds=scylla-node1,scylla-node2 --smp 1 --memory 750M --overprovisioned 1 --api-address 0.0.0.0
+#    volumes:
+#      - "./scylla/scylla.yaml:/etc/scylla/scylla.yaml"
+#      - "./scylla/cassandra-rackdc.properties.dc1:/etc/scylla/cassandra-rackdc.properties"
+#    networks:
+#      web:
+#
+#networks:
+#  web:
+#    driver: bridge

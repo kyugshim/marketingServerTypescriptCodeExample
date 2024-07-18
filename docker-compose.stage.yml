@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  api:
+    build:
+      dockerfile: ./docker/dockerfile.stage
+      context: .
+    command: yarn start:stage
+    ports:
+      - "80:3000"
+
+#  marketing-scylla-node:
+#    image: scylladb/scylla
+#    hostname: scylladb/scylla
+#    ports:
+#      - "9160:9160"
+#      - "9042:9042"
